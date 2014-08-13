@@ -1,0 +1,1 @@
+console.log 'Hello Thinkful Multiplication Tables'
