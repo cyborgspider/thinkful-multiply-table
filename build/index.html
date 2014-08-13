@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>Thinkful Multiplication Tables Title</title>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.1/css/foundation.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="row">
+      <div class="columns">
+        <h1>I Can Multiply!</h1>
+        <table ng-controller="MultiplicationCtrl">
+          <tr ng-repeat="numberA in numbers">
+            <td ng-repeat="numberB in numbers">{{ numberA * numberB }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
+    <script src="js/myApp.js"></script>
+  </body>
+</html>

@@ -9,38 +9,34 @@ module.exports =function(grunt){
           livereload: true
         },
         js: {
-          files:   ['site/scripts/*.coffee'],
+          files:   ['src/scripts/*.coffee'],
           tasks:   ['coffee','uglify']
         },
         css:{
-          files:   ['site/styles/*.styl'],
+          files:   ['src/styles/*.styl'],
           tasks:   ['stylus']
         },
         html:{
-          files:   ['site/*.jade','site/inc/*'],
+          files:   ['src/*.jade','src/inc/*'],
           tasks:   ['jade']
         }
       },
       coffee:{
-        compile: {
-            files: {
-              'build/js/scripts.js': ['site/scripts/*.coffee'] // compile and concat into single file
-            }
-          }
-      },
-      uglify: {
-        my_target: {
-          files: {
-            'build/js/scripts.min.js': ['build/js/scripts.js']
-          }
+        glob_to_multiple: {
+          expand: true,
+          flatten: true,
+          cwd: 'src/scripts',
+          src: ['*.coffee'],
+          dest: 'build/js',
+          ext: '.js'
         }
       },
       copy: {
         main: {
           files: [
-            {expand: true, cwd: 'site/images', src: '*', dest: 'build/img'},
-            {expand: true, cwd: 'site/lib/css', src: '*', dest: 'build/css'},
-            {expand: true, cwd: 'site/lib/js', src: '*', dest: 'build/js'}
+            {expand: true, cwd: 'src/images', src: '*', dest: 'build/img'},
+            {expand: true, cwd: 'src/lib/css', src: '*', dest: 'build/css'},
+            {expand: true, cwd: 'src/lib/js', src: '*', dest: 'build/js'}
           ]
         },
       },
@@ -50,7 +46,7 @@ module.exports =function(grunt){
             import:['nib']
           },
           files: {
-            'build/css/styles.css': ['site/styles/*.styl'] // compile and concat into single file
+            'build/css/styles.css': ['src/styles/*.styl'] // compile and concat into single file
           }
         }
 
@@ -60,7 +56,7 @@ module.exports =function(grunt){
           options: {pretty:true},
           files:[{
             expand: true,
-            cwd:    'site/',
+            cwd:    'src/',
             src:    "*.jade",
             ext:    ".html",
             dest:   "build/"
@@ -75,18 +71,6 @@ module.exports =function(grunt){
       }
      });
 
-     //Register (load) the plugins to make them available in Grunt
-     //matchdep makes this unnecessary, but it's added here for reference.
-     // grunt.loadNpmTasks('grunt-contrib-watch');
-     // grunt.loadNpmTasks('grunt-contrib-coffee');
-     // grunt.loadNpmTasks('grunt-contrib-stylus');
-     // grunt.loadNpmTasks('grunt-contrib-jade');
-     // grunt.loadNpmTasks('grunt-contrib-imagemin');
-     // grunt.loadNpmTasks('grunt-contrib-uglify');
-     // grunt.loadNpmTasks('grunt-contrib-copy');
-
-     //Run the task
-     //Copy is registered but not executed. Refer to commented code in the initConfig method for details on how to add it.
-     grunt.registerTask('default', ['watch','coffee', 'uglify', 'stylus', 'jade', 'copy']);
-     grunt.registerTask('build', ['coffee', 'uglify', 'stylus','jade', 'copy']);
+     grunt.registerTask('default', ['watch','coffee', 'stylus', 'jade', 'copy']);
+     grunt.registerTask('build', ['coffee', 'stylus','jade', 'copy']);
 };
