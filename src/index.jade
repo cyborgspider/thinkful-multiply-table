@@ -8,11 +8,14 @@ html(ng-app="myApp")
   body
     .row
       .columns
-        h1 I Can Multiply!
-        table(ng-controller="MultiplicationCtrl")
-          tr(ng-repeat="numberA in numbers")
-            td(ng-repeat="numberB in numbers")
-              {{ numberA * numberB }}
+        div(ng-controller="MultiplicationCtrl", initial-number-limit="10")
+          h1 I Can Multiply!
+          p Type a number limit for your multiplication table
+          input(type="number", ng-model="numberLimit", placeholder="Enter a number")
+          table
+            tr(ng-repeat="numberA in numbers")
+              td(ng-repeat="numberB in numbers")
+                {{ compute(numberA,numberB) }}
 
     script(src="http://code.jquery.com/jquery-2.0.3.min.js")
     script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js")

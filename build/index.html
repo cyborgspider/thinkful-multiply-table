@@ -8,12 +8,16 @@
   <body>
     <div class="row">
       <div class="columns">
-        <h1>I Can Multiply!</h1>
-        <table ng-controller="MultiplicationCtrl">
-          <tr ng-repeat="numberA in numbers">
-            <td ng-repeat="numberB in numbers">{{ numberA * numberB }}</td>
-          </tr>
-        </table>
+        <div ng-controller="MultiplicationCtrl" initial-number-limit="10">
+          <h1>I Can Multiply!</h1>
+          <p>Type a number limit for your multiplication table</p>
+          <input type="number" ng-model="numberLimit" placeholder="Enter a number">
+          <table>
+            <tr ng-repeat="numberA in numbers">
+              <td ng-repeat="numberB in numbers">{{ compute(numberA,numberB) }}</td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
